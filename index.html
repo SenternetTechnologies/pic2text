@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENTERNET TECHNOLOGIES - Click-to-Chat Contacts</title>
+    <title>SENTERNET TECHNOLOGIES - Bulk Click-to-Chat for Local Businesses</title>
     <!-- Load Tailwind CSS for modern, responsive styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom styles for the WhatsApp button */
         .whatsapp-button {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             /* Base Color */
@@ -18,6 +19,9 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             position: relative; /* Needed for serial number positioning */
             text-decoration: none;
+            text-align: center;
+            padding-top: 1rem; /* Ensure space for serial number */
+            min-height: 80px; /* Consistent size */
         }
         
         /* HOVER State */
@@ -35,19 +39,26 @@
 
         /* Custom Icon and Tag Styling */
         .whatsapp-icon {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             fill: white;
-            margin-right: 8px;
+            margin-bottom: 4px;
         }
         
         .number-tag {
             font-size: 0.8rem;
             color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
             display: block;
             margin-bottom: 2px;
             text-align: center;
             width: 100%;
+        }
+        
+        .action-text {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
         }
 
         /* Serial Number Styling */
@@ -70,61 +81,65 @@
 
     <div class="contact-list max-w-5xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-2xl">
         <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-6 text-center border-b pb-3 border-green-500">
-            SENTERNET TECHNOLOGIES Contact Hub
+            SENTERNET TECHNOLOGIES Business Marketing Hub
         </h2>
-        <p class="text-center text-sm text-gray-600 mb-8">
-            Click any button below to start a chat on WhatsApp with the pre-filled message: 
-            <span class="font-semibold text-green-600">"details about senternet"</span>
+        <p class="text-center text-sm text-gray-600 mb-4">
+            Click any button below to start a chat on WhatsApp with the marketing message pre-filled for **Pudukkottai, Trichy & Thanjavur** area businesses:
         </p>
+        <div class="bg-green-50 p-3 rounded-lg border-l-4 border-green-500 mb-8 text-center">
+            <p class="font-semibold text-green-700 text-sm italic">
+                Pre-filled Message: "Elevate your local business! Get a stunning, high-performance website and effective digital marketing strategies from Senternet Technologies. Let's grow your brand online."
+            </p>
+        </div>
+        
         <p class="text-center text-xs text-gray-400 mb-6">
             <span class="text-green-500 font-bold">GREEN</span> indicates contact not yet opened. 
             <span class="text-blue-700 font-bold">DARK BLUE</span> indicates contact was previously opened.
         </p>
 
-        <!-- Container for all the buttons - Now using Tailwind Grid for 3 columns on large screens -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="contact-buttons-container">
+        <!-- Container for all the buttons - Tailwind Grid for 3 columns on large screens -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3" id="contact-buttons-container">
             <!-- JavaScript will populate the buttons here -->
         </div>
         
     </div>
 
     <script>
-        // All 150 numbers provided by the user
+        // Fictional, representative Indian mobile numbers (Pudukkottai, Trichy, Thanjavur region focus)
         const phoneNumbers = [
-            "9841034806", "9444159692", "9884002829", "9840077729", "9840710096", 
-            "9840836983", "9840749405", "9840413133", "9840024307", "9444044986", 
-            "9884291399", "9884397326", "9443397002", "9840031478", "9940022455", 
-            "9840299050", "9841086371", "9444105278", "9841298430", "9840367483", 
-            "9840096665", "9840045644", "9841049818", "9884032646", "9841294321", 
-            "9444076697", "9884135700", "9841017006", "9381012190", "9444039690", 
-            "9841032122", "9841261111", "9444128409", "9382308060", "9840714106", 
-            "9841015555", "9841043399", "9444252376", "9382143656", "9383376555", 
-            "9840773370", "9884191370", "9840060363", "9841070259", "9841051289", 
-            "9884123361", "9841006003", "9841065982", "9444032119", "9840093494", 
-            "9843061567", "9840235045", "9841015698", "9841026869", "9444325170", 
-            "9444040114", "9841089644", "9840316251", "9840254700", "9841037322", 
-            "9841045434", "9841026012", "9884017000", "9841077995", "9840371717", 
-            "9841040317", "9841028414", "9841047909", "9841036951", "9444041858", 
-            "9444024986", "9884397321", "9884085819", "9840149184", "9444128080", 
-            "9841067776", "9841071969", "9841410062", "9841008839", "9841275576", 
-            "9444069744", "9840022073", "9884098884", "9841027450", "9841065421", 
-            "9444013010", "9444142062", "9841090727", "9444194177", "9884070536", 
-            "9841047065", "9444046687", "9444051995", "9841062271", "9841032885", 
-            "9444050555", "9841019599", "9444024912", "9840046986", "9840703417", 
-            "9841150035", "9841078118", "9840044051", "9841465173", "9840757632", 
-            "9444111620", "9841088632", "9884066016", "9840018508", "9444067141", 
-            "9841168400", "9444143914", "9840123452", "9841045227", "9844007466", 
-            "9444300108", "9444032970", "9840126985", "9840051647", "9841049650", 
-            "9840445822", "9841411522", "9444022296", "9841041222", "9884071904", 
-            "9840779009", "9282102528", "9884013559", "9840338522", "9840054728", 
-            "9841032424", "9841311063", "9841008919", "9840055038", "9840462196", 
-            "9444060694", "9840350326", "9840287155", "9841044253", "9841018844", 
-            "9841055760", "9841114737", "9884053650", "9841055786", "9282157155", 
-            "9840043827", "9840461917", "9444265168", "9884071622", "9840116911"
+            "9842170881", "9443582109", "8148301556", "9360549112", "9444738590",
+            "8939217643", "9842250101", "9345091234", "8610573928", "9894103775",
+            "9442080055", "8072164321", "9843397008", "9488123045", "8825067890",
+            "9380120015", "9445105992", "8667530987", "9840836224", "9444176088",
+            "8122345678", "9940192837", "8754210065", "9342500778", "9841357924",
+            "9443721900", "8903456123", "9842010078", "9444053911", "8124700021",
+            "9384519987", "9445209376", "8608143659", "9843073379", "9442191375",
+            "8939106036", "9342702591", "9444351287", "8072006361", "9840212336",
+            "9443040055", "8870165983", "9382232111", "9444003498", "8124161569",
+            "9841235048", "9443105691", "8903268694", "9360425171", "9445040118",
+            "8610589645", "9842016259", "9444054707", "8148037329", "9384145431",
+            "9445126019", "8825017007", "9843277990", "9442071719", "8939440318",
+            "9345128419", "9444047905", "8608336952", "9842241851", "9443024982",
+            "8122197327", "9380385810", "9444049185", "8667128088", "9841167771",
+            "9443171962", "8903410069", "9342008831", "9445275574", "8124069749",
+            "9843022077", "9444198881", "8608227455", "9840165429", "9443013017",
+            "8939142068", "9382090729", "9444194171", "8122070530", "9841347069",
+            "9443046685", "8610151998", "9360562279", "9444032881", "8903250559",
+            "9842019591", "9443024915", "8124046989", "9384703418", "9445150039",
+            "8667178111", "9842044059", "9443465178", "8939757635", "9342111629",
+            "9445188631", "8122066018", "9843018507", "9444067149", "8608168407",
+            "9382143919", "9445123457", "8903045224", "9840207469", "9443300101",
+            "8148032977", "9360126989", "9444051649", "8610549651", "9842445827",
+            "9443411529", "8939022291", "9342041227", "9445071909", "8124779001",
+            "9843102521", "9443013550", "8667038527", "9840254721", "9444032429",
+            "8903311061", "9342008910", "9445055039", "8122462199", "9843060690",
+            "9444350329", "8608287157", "9380144259", "9445118841", "8939055761",
+            "9842114739", "9443053657", "8610455781", "9360157159", "9444043821",
+            "8903461919", "9842265161", "9443071629", "8608116915"
         ];
 
-        // The pre-filled message (must be URL encoded)
-        const chatMessage = "details about senternet";
+        // The new marketing message (must be URL encoded)
+        const chatMessage = "Elevate your local business! Get a stunning, high-performance website and effective digital marketing strategies from Senternet Technologies. Let's grow your brand online.";
         const encodedMessage = encodeURIComponent(chatMessage);
         
         const container = document.getElementById('contact-buttons-container');
@@ -138,7 +153,7 @@
 
             // Anchor Tag (The actual clickable button)
             const a = document.createElement('a');
-            a.className = 'whatsapp-button text-white font-bold py-3 px-4 rounded-xl shadow-lg';
+            a.className = 'whatsapp-button text-white font-bold rounded-xl shadow-lg';
             a.href = waLink;
             a.target = '_blank';
             a.rel = 'noopener noreferrer';
@@ -148,7 +163,7 @@
             sn.className = 'serial-number';
             sn.textContent = serialNumber;
 
-            // WhatsApp SVG Icon (Source: Lucide Icons - customized)
+            // WhatsApp SVG Icon 
             const svgIcon = `
                 <svg class="whatsapp-icon" viewBox="0 0 24 24">
                     <path d="M12 2C6.477 2 2 6.477 2 12c0 3.314 1.282 6.307 3.376 8.52L4 22l2.365-.675c1.892 1.092 4.09 1.65 6.183 1.65 5.523 0 10-4.477 10-10S17.523 2 12 2zm4.332 14.512c-.223.372-.45.418-.847.362-1.042-.15-2.26-.523-3.61-1.378-1.57-.978-2.824-2.45-3.52-3.868-.088-.178-.147-.354-.117-.54.03-.186.136-.34.286-.484l.872-.87c.15-.15.344-.225.538-.225.195 0 .388.075.538.225l1.09 1.09c.15.15.225.344.225.538 0 .195-.075.388-.225.538l-.66.66c-.15.15-.225.344-.225.538 0 .195.075.388.225.538 1.125 1.125 2.5 1.875 3.938 2.344.195.062.388.136.538.286l.66-.66c.15-.15.344-.225.538-.225.195 0 .388.075.538.225l1.09 1.09c.15.15.225.344.225.538 0 .195-.075.388-.225.538l-.872.87c-.15.15-.316.27-.51.298z"/>
@@ -156,17 +171,18 @@
             `;
 
             const tag = document.createElement('span');
-            tag.className = 'number-tag'; // Adjusted styling to center text
+            tag.className = 'number-tag'; 
             tag.textContent = `+91 ${number.substring(0, 5)} ${number.substring(5)}`;
 
-            const message = document.createElement('div');
-            message.className = 'flex flex-col items-center justify-center';
-            message.innerHTML = `${svgIcon}<span class="mt-1">Start Chat</span>`;
-
+            const action = document.createElement('span');
+            action.className = 'action-text';
+            action.textContent = 'Send Promo';
+            
             // Append SN and Number Tag to the Anchor
             a.appendChild(sn);
             a.appendChild(tag);
-            a.appendChild(message);
+            a.innerHTML += svgIcon;
+            a.appendChild(action);
             
             return a;
         }
@@ -180,8 +196,7 @@
     </script>
 
     <footer class="mt-10 text-center text-xs text-gray-500 pt-4 border-t border-gray-300">
-        <p>A Digital Solution by SENTERNET TECHNOLOGIES, Aranthangi</p>
-        <p>Contact: +91 81900 38085 | Mail: senternettechnologies@gmail.com</p>
+        <p>SENTERNET TECHNOLOGIES | Aranthangi, Pudukkottai | WhatsApp: +91 81900 38085 | Mail: senternettechnologies@gmail.com</p>
     </footer>
 
 </body>
